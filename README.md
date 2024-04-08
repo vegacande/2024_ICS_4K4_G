@@ -6,11 +6,11 @@
 ![Estructura del Repositorio](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/ArchivoAdicional_Dise%C3%B1oderepositorio_TP04_ICS_4K4_2024.png)
 
 ## Ítems de Configuración
-![Ítems de Configuración](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Items_de_configuracion.png.jpg)
+![Ítems de Configuración](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/ArchivoAdicional_Items%20de%20configuracion_TP04_ICS_4K4_2024.png.jpg)
 
 
 ## Glosario 
-![Glosario](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Glosario.png.jpg)
+![Glosario](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/ArchivoAdicional_Glosario_TP04_ICS_4K4_2024.png.jpg)
 
 ## Criterios de Línea Base. 
 El criterio de línea base definido por el grupo es el siguiente: se actualizará la línea 
