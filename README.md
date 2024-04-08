@@ -1,4 +1,4 @@
-# Ingeniería y Calidad de Software - 4K4 - 2024 - Grupo 
+# Ingeniería y Calidad de Software - 4K4 - 2024 - Grupo 10
 
 # Trabajo Practico N°4:
 
