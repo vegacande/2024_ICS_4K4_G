@@ -3,7 +3,7 @@
 # Trabajo Practico N°4:
 
 ## Estructura Repositorio
-![Estructura del Repositorio](https://github.com/vegacande/2024_ICS_4K4_G/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Dise%C3%B1o_de_repositorio.png)
+![Estructura del Repositorio](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/ArchivoAdicional_Dise%C3%B1oderepositorio_TP04_ICS_4K4_2024.png)
 
 ## Ítems de Configuración
 ![Ítems de Configuración](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Items_de_configuracion.png.jpg)
