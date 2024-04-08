@@ -10,4 +10,4 @@
 
 
 ####Glosario 
-![Glosario](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Items_de_configuracion.png.jpg)
+![Glosario](https://github.com/vegacande/2024_ICS_4K4_G10/blob/main/Actividades/Trabajos_pr%C3%A1cticos/TP04/Glosario.png.jpg)
