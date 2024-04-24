@@ -1,0 +1,184 @@
+﻿@model TP6_ICS_G10_2024.Models.PedidoCreacionViewModel
+@{
+    ViewData["Title"] = "Publicar";
+
+}
+
+<div class="container">
+    <div class="card">
+        <table class="table">
+            <thead>
+                <th>
+
+                </th>
+            </thead>
+            <tbody>
+                <form asp-action="Publicar" method="post" enctype="multipart/form-data">
+                    <tr>
+                        <td>
+                            <select name="TipoCargaId">
+                                <option value="0"><-----Seleccione tipo de carga -----></option>
+                                    @foreach (var item in Model.TipoCargas)
+                                    {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                    }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <label asp-for="DomicilioEntrega.Numero" class="control-label"></label>
+                        <input type="number" name="DomicilioEntrega.Numero" value="" asp-for="DomicilioEntrega.Numero" />
+                        </td>
+                        <td>
+
+                        <label asp-for="DomicilioEntrega.Calle" class="control-label"></label>
+                        <input type="text" asp-for="DomicilioEntrega.Calle" placeholder="Calle" />
+                        </td>
+                        <td>
+                            <select name="PaisId" id="selectPais">
+                                <option value="0"><-----Seleccione el pais -----></option>
+                                    @foreach (var item in Model.Paises)
+                                    {
+                                    <option  value="@item.Id">@item.Nombre</option>
+                                    }
+                            </select>
+                        </td>
+                        <td>
+                        <select name="ProvinciaId" id="selectProvincia">
+                                <!-- Opciones de provincia se llenarán dinámicamente mediante JavaScript -->
+                            </select>
+                        </td>
+                        <td>
+                        <select name="LocalidadId" id="selectLocalidad">
+                                <!-- Opciones de localidad se llenarán dinámicamente mediante JavaScript -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">
+                                <label asp-for="FechaRetiro" class="control-label"></label>
+                                <input asp-for="FechaRetiro" id="fechaVencimiento" class="form-control" type="date" value="@DateTime.Today" />
+                                <span asp-validation-for="FechaRetiro" class="text-danger"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="form-label">
+                                <label asp-for="FechaEntrega" class="control-label"></label>
+                                <input asp-for="FechaEntrega" id="fechaVencimiento" class="form-control" type="date" value="@DateTime.Today" />
+                                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <div class="imagen">
+                            <label class="custum-file-upload" for="file">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                                        <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                             <input asp-for="ImagenFile " id="file" type="file" accept=".png, .jpg, .jpeg">
+                                <div class="text">
+                                </div>
+                                <span>Suba una Imagen</span>
+                                <span asp-validation-for="ImagenFile" class="text-danger"></span>
+                            </label>
+                            <div class="d-flex" id="imagen-preview"></div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <td>
+                            <<button type="submit">Publicar Pedido</button>
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+               
+                
+
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectPais = document.getElementById("selectPais");
+        var selectProvincia = document.getElementById("selectProvincia");
+        var selectLocalidad = document.getElementById("selectLocalidad");
+
+        // Evento change en el select de país
+        selectPais.addEventListener("change", function () {
+            var paisId = selectPais.value;
+            console.log(paisId);
+            // Limpia las opciones actuales de provincia y localidad
+            selectProvincia.innerHTML = "<option value=''>Seleccione una provincia</option>";
+            selectLocalidad.innerHTML = "<option value=''>Seleccione una localidad</option>";
+
+            // Filtra las provincias por el país seleccionado
+            var provincias = @Html.Raw(Json.Serialize(Model.Provincias));
+            console.log(provincias);
+            var provinciasFiltradas = provincias.filter(function (provincia) {
+                console.log(provincia.PaisId == paisId);
+                return provincia.paisId == paisId;
+            });
+
+            console.log(provinciasFiltradas);
+            // Agrega las opciones de provincia al select
+            provinciasFiltradas.forEach(function (provincia) {
+                var option = document.createElement("option");
+                option.value = provincia.id;
+                option.textContent = provincia.nombre;
+                console.log(option);
+                selectProvincia.appendChild(option);
+            });
+        });
+
+        // Evento change en el select de provincia
+        selectProvincia.addEventListener("change", function () {
+            var provinciaId = selectProvincia.value;
+            // Limpia las opciones actuales de localidad
+            selectLocalidad.innerHTML = "<option value=''>Seleccione una localidad</option>";
+
+            // Filtra las localidades por la provincia seleccionada
+            var localidades = @Html.Raw(Json.Serialize(Model.Localidades));
+            var localidadesFiltradas = localidades.filter(function (localidad) {
+                return localidad.provinciaId == provinciaId;
+            });
+
+            // Agrega las opciones de localidad al select
+            localidadesFiltradas.forEach(function (localidad) {
+                var option = document.createElement("option");
+                option.value = localidad.id;
+                option.textContent = localidad.nombre;
+                selectLocalidad.appendChild(option);
+            });
+        });
+    });
+
+           $(document).ready(function () {
+            $("#file").change(function () {
+                var imagen = this.files[0];
+                if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
+                    $("#file").val("");
+                    $("#imagen-preview").html('<div class="alert alert-danger" role="alert"> <b>La imagen debe ser formato JPG o PNG</b> </div>');
+                } else if (imagen["size"] > 2000000) {
+                    $("#file").val("");
+                    $("#imagen-preview").html('<div class="alert alert-danger" role="alert"> <b>La imagen no debe pesar mas de 2MB</b> </div>');
+                } else {
+                    var datosImagen = new FileReader;
+                    datosImagen.readAsDataURL(imagen);
+                    $(datosImagen).on("load", function (event) {
+                        var rutaImagen = event.target.result;
+                        $("#imagen-preview").html('<img src="' + rutaImagen + '" class="img-fluid">');
+                    })
+                }
+            })
+        })
+</script>

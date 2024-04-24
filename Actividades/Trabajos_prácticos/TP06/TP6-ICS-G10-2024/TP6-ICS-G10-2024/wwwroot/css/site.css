@@ -1,0 +1,117 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+
+#imagen-preview {
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+    margin-top: 20px;
+    align-content: center;
+    border: 1px solid #d9d9d9;
+}
+
+.imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.custum-file-upload {
+    height: 110px;
+    width: 110px;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px dashed #cacaca;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+    .custum-file-upload .icon {
+        align-items: center;
+        justify-content: center;
+    }
+
+        .custum-file-upload .icon svg {
+            height: 40px;
+            align-content: center;
+            align-items: center;
+        }
+
+    .custum-file-upload span {
+        color: black;
+        display: flex;
+    }
+
+    .custum-file-upload input {
+        display: none;
+    }
+
+
+
+table {
+    background-color: #240046;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    color: white;
+}
+
+.table thead th {
+    background-color: #e0eafc; /* Color de fondo azulcito */
+    border-color: black;
+    color: black;
+    text-align: center;
+    align-items: center;
+}
+
+table tr:hover {
+    background-color: #d4e3fc; /* Color de fondo al pasar el ratón */
+}
+
+    table tr:hover td {
+        font-weight: bold; /* Añade negrita al texto dentro de las celdas al pasar el ratón */
+        color: black;
+        border-color: black;
+    }
+
+
+img {
+    height: 200px;
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s;
+}
+
+    img:hover {
+        transform: scale(1.2);
+    }

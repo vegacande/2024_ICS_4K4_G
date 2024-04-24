@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\TP6-ICS-G10-2024.props" />
+</Project>

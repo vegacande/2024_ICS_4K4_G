@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TP6_ICS_G10_2024.Models.PedidosVM>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+
+<h1>Pedidos</h1>
+
+
+<div class="container">
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Fecha de Retiro</th>
+                <th>Fecha de Entrega </th>
+                <th>Direccion de Retiro</th>
+                <th>Direccion de Entrega</th>
+                <th>Tipo de carga</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var Pedido in Model)
+                {
+                    <tr>
+                        <td>@Pedido.Id</td>
+                        <td>@Pedido.FechaRetiro.ToShortDateString()</td>
+                        <td>@Pedido.FechaEntrega.ToShortDateString()</td>
+                        <td>Buenos Aires 450, Córdoba, Córdoba, Argentina</td>
+                        <td>@Pedido.DomicilioEntrega.Calle @Pedido.DomicilioEntrega.Numero, @Pedido.Localidad, @Pedido.Provincia.Nombre, @Pedido.Pais.Nombre</td>
+                        <td>@Pedido.TipoCarga.Nombre</td>
+                        <td>
+                            @if (Pedido.Imagen != null && Pedido.Imagen.Length > 0 && !Pedido.Imagen.SequenceEqual(new byte[0]))
+                            {
+                                <img loading="lazy" src="data:image/jpeg;base64,@Convert.ToBase64String(Pedido.Imagen)" alt="@Pedido.Id" />
+
+                            }
+                            else
+                            {
+                                <img src="~/Imagenes/nofoto.png" />
+
+                            }
+                        </td>
+                        <td>
+                            <button>Cotizar</button>
+                        </td>
+                    </tr>
+                }
+            }
+            
+        </tbody>
+    </table>
+</div>
