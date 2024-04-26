@@ -54,7 +54,37 @@ namespace TP6_ICS_G10_2024.Controllers
         [HttpPost]
         public async Task<IActionResult> Publicar(PedidoCreacionViewModel pedido)
         {
-           await pedido.ConvertirFotoAsync(pedido.ImagenFile);
+            if (pedido.LocalidadId <= 0 || pedido.PaisId <= 0 || pedido.ProvinciaId <= 0 || pedido.DomicilioEntrega.Calle == null || pedido.DomicilioEntrega.Numero <= 0)
+            {
+                TempData["error"] = "El pedido no se ha publicado con éxito, hay algunos datos de la dirección de entrega inválidos o incorrectos";
+            }
+            else if (pedido.FechaRetiro < DateTime.Today || pedido.FechaRetiro == null)
+            {
+                TempData["error"] = "El pedido no se ha publicado con éxito, la fecha del retiro debe ser mayor o igual a la fecha de hoy";
+            }
+            else if (pedido.FechaRetiro > pedido.FechaEntrega || pedido.FechaEntrega == null)
+            {
+                TempData["error"] = "El pedido no se ha publicado con éxito, la fecha de entrega debe ser mayor o igual a la fecha de retiro";
+            }
+            else if (pedido.TipoCargaId <= 0)
+            {
+                TempData["error"] = "El pedido no se ha publicado con éxito, el tipo de carga no se ha seleccionado";
+            }
+
+            if (TempData["error"] != null)
+            {
+                pedido.TipoCargas = await repositorioTipoCargas.ObtenerTipoCargas();
+                pedido.Paises = await repositorioPaises.ObtenerPaises();
+                pedido.Provincias = await repositorioProvincias.ObtenerProvincias();
+                pedido.Localidades = await repositorioLocalidades.ObtenerLocalidades();
+                return View(pedido);
+            }
+
+            // Código adicional en caso de que todas las condiciones sean falsas
+
+
+
+            await pedido.ConvertirFotoAsync(pedido.ImagenFile);
            pedido.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadId);
            pedido.TipoCarga = await repositorioTipoCargas.ObtenerCargaPorId(pedido.TipoCargaId);
             await repositorioPedidos.Crear(pedido);

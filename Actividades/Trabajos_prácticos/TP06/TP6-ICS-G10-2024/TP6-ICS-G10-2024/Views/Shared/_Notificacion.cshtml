@@ -1,0 +1,120 @@
+﻿
+
+
+
+@if(TempData["exitoso"] !=null)
+{
+   <script>
+           Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '@TempData["exitoso"]',
+              showConfirmButton: false,
+              timer: 2370
+            });
+
+   </script>
+}
+
+@if (TempData["error"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: '@TempData["error"]',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+    </script>
+}
+
+@if (TempData["MensajeSucursalExistente"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '@TempData["MensajeSucursalExistente"]',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+
+}@if (TempData["MensajeProductoExistente"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '@TempData["MensajeProductoExistente"]',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+}
+
+@if (TempData["MensajeClienteExistente"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '@TempData["MensajeClienteExistente"]',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+}
+@if (TempData["ClienteConDeuda"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '@TempData["ClienteConDeuda"]',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+    </script>
+}
+
+@if (TempData["MensajeProveedorExistente"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: '@TempData["MensajeProveedorExistente"]',
+            showConfirmButton: false,
+            timer: 2000
+        });
+
+    </script>
+}
+
+
+
+
+@if (TempData["resultado"] != null)
+{
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'info',
+            title: '@TempData["resultado"]',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+    </script>
+}
+
+
+<!-- Agrega un botón para abrir el modal -->
+
+
+
+
