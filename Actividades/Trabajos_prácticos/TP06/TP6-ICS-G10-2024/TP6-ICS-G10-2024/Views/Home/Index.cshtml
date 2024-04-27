@@ -12,7 +12,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th id="encabezado" colspan="8"><h1>Pedidos</h1></th>
+                <th id="encabezado" colspan="9"><h1>Pedidos</h1></th>
             </tr>
             <tr>
                 <th class="align-content-center">Número</th>
@@ -22,6 +22,7 @@
                 <th class="align-content-center">Dirección de Entrega</th>
                 <th class="align-content-center">Tipo de carga</th>
                 <th class="align-content-center">Imagen</th>
+                <th class="align-content-center">Observaciones</th>
                 <th class="align-content-center">Cotización</th>
             </tr>
         </thead>
@@ -32,10 +33,10 @@
                 {
                     <tr>
                         <td class="align-content-center">@Pedido.Id</td>
-                        <td class="align-content-center">@Pedido.FechaRetiro.ToShortDateString()</td>
-                        <td class="align-content-center">@Pedido.FechaEntrega.ToShortDateString()</td>
-                        <td class="align-content-center">Buenos Aires 450, Córdoba, Córdoba, Argentina</td>
-                        <td class="align-content-center">@Pedido.DomicilioEntrega.Calle @Pedido.DomicilioEntrega.Numero, @Pedido.Localidad, @Pedido.Provincia.Nombre, @Pedido.Pais.Nombre</td>
+                        <td class="align-content-center">@Pedido.FechaRetiro.ToString("dd/MM/yyyy")</td>
+                        <td class="align-content-center">@Pedido.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                        <td class="align-content-center">@Pedido.DomicilioRetiro.Calle @Pedido.DomicilioRetiro.Numero, @Pedido.DomicilioRetiro.Localidad.Nombre, @Pedido.ProvinciaRetiro.Nombre, @Pedido.PaisRetiro.Nombre</td>
+                        <td class="align-content-center">@Pedido.DomicilioEntrega.Calle @Pedido.DomicilioEntrega.Numero, @Pedido.DomicilioEntrega.Localidad.Nombre, @Pedido.Provincia.Nombre, @Pedido.Pais.Nombre</td>
                         <td class="align-content-center">@Pedido.TipoCarga.Nombre</td>
                         <td class="align-content-center">
                             @if (Pedido.Imagen != null && Pedido.Imagen.Length > 0 && !Pedido.Imagen.SequenceEqual(new byte[0]))
@@ -45,10 +46,12 @@
                             }
                             else
                             {
-                                <a>No se cargo una imagen del paquete</a>
                                 <img src="~/Imagenes/nofoto.png" />
 
                             }
+                        </td>
+                        <td class="align-content-center">
+                            @Pedido.Observaciones
                         </td>
                         <td class="align-content-center">
                             <button type="button" class="btn btn-rounded bg-white">Cotizar pedido</button>

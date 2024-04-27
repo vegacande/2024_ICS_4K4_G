@@ -15,7 +15,7 @@ namespace TP6_ICS_G10_2024.Clases
 
         public string? Descripcion { get; set; }
 
-
+        public decimal TarifaTipoCarga { get; set; }
 
     }
 }

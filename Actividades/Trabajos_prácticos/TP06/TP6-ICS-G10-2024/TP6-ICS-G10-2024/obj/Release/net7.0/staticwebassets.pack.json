@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\TP6-ICS-G10-2024.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\tomas\\Downloads\\ICS\\TPGIT\\2024_ICS_4K4_G\\Actividades\\Trabajos_prácticos\\TP06\\TP6-ICS-G10-2024\\TP6-ICS-G10-2024\\wwwroot\\Imagenes\\nofoto.png",
+      "PackagePath": "staticwebassets\\Imagenes\\nofoto.png"
+    },
+    {
       "Id": "C:\\Users\\tomas\\Downloads\\ICS\\TPGIT\\2024_ICS_4K4_G\\Actividades\\Trabajos_prácticos\\TP06\\TP6-ICS-G10-2024\\TP6-ICS-G10-2024\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

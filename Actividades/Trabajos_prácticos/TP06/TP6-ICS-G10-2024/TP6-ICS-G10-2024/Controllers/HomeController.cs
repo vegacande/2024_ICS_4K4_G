@@ -32,6 +32,9 @@ namespace TP6_ICS_G10_2024.Controllers
 
             foreach (var item in pedidos)
             {
+                item.LocalidadRetiro = repositorioLocalidades.ObtenerLocalidadPorId(item.DomicilioRetiro.LocalidadId);
+                item.ProvinciaRetiro = repositorioProvincias.ObtenerProvinciaPorId(item.LocalidadRetiro.ProvinciaId);
+                item.PaisRetiro = repositorioPaises.ObtenerPaisPorId(item.ProvinciaRetiro.PaisId);
                 item.DomicilioEntrega = repositorioDomicilios.ObtenerDomicilioPorId(item.DomicilioEntregaId);
                 item.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(item.DomicilioEntrega.LocalidadId);
                 item.Provincia = repositorioProvincias.ObtenerProvinciaPorId(item.DomicilioEntrega.Localidad.ProvinciaId);

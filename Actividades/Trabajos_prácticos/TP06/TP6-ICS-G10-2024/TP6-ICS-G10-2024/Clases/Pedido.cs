@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,20 @@ namespace TP6_ICS_G10_2024.Clases
 
         public Domicilio DomicilioEntrega { get; set; }
 
+        public Domicilio DomicilioRetiro { get; set; }
+
         public int DomicilioEntregaId { get; set; }
+
+        public int DomicilioRetiroId { get; set; }
+
+        [MaxLength(200)]
+        public string Observaciones { get; set; }
 
         public TipoCarga TipoCarga { get; set; }
 
         public byte[]? Imagen { get; set; }
+
+        public decimal MontoFinal { get; set; }
 
         public async Task ConvertirFotoAsync(IFormFile foto)
         {

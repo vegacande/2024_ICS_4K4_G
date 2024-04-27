@@ -41,6 +41,7 @@ namespace TP6_ICS_G10_2024.Controllers
         [HttpGet]
         public async Task<IActionResult> Publicar()
         {
+            //Carga todos los datos necesarios para la vista de publicar pedido
             var modelo = new PedidoCreacionViewModel();
             modelo.TipoCargas = await repositorioTipoCargas.ObtenerTipoCargas();
             modelo.Paises = await repositorioPaises.ObtenerPaises();
@@ -54,6 +55,8 @@ namespace TP6_ICS_G10_2024.Controllers
         [HttpPost]
         public async Task<IActionResult> Publicar(PedidoCreacionViewModel pedido)
         {
+
+            //Valida en el caso que no se ingrese algun dato del pedido tanto como la fechas ,direcciones, tipo de carga
             if (pedido.LocalidadId <= 0 || pedido.PaisId <= 0 || pedido.ProvinciaId <= 0 || pedido.DomicilioEntrega.Calle == null || pedido.DomicilioEntrega.Numero <= 0)
             {
                 TempData["error"] = "El pedido no se ha publicado con éxito, hay algunos datos de la dirección de entrega inválidos o incorrectos";
@@ -80,24 +83,51 @@ namespace TP6_ICS_G10_2024.Controllers
                 return View(pedido);
             }
 
-            // Código adicional en caso de que todas las condiciones sean falsas
-
-
-
             await pedido.ConvertirFotoAsync(pedido.ImagenFile);
-           pedido.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadId);
-           pedido.TipoCarga = await repositorioTipoCargas.ObtenerCargaPorId(pedido.TipoCargaId);
+            pedido.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadId);
+            pedido.DomicilioRetiro.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadRetiroId);
+            pedido.TipoCarga = await repositorioTipoCargas.ObtenerCargaPorId(pedido.TipoCargaId);
             await repositorioPedidos.Crear(pedido);
 
+            var provinciaRetiro = repositorioProvincias.ObtenerProvinciaPorId(pedido.DomicilioRetiro.Localidad.ProvinciaId);
+            var provinciaEntrega = repositorioProvincias.ObtenerProvinciaPorId(pedido.DomicilioEntrega.Localidad.ProvinciaId); 
+            
+            
+            var paisRetiro = repositorioPaises.ObtenerPaisPorId(provinciaRetiro.PaisId);
+            var paisEntrega = repositorioPaises.ObtenerPaisPorId(provinciaEntrega.PaisId);
 
+            //Crea el mail y lo enviara al correo de los proveedores activos
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(configuration.GetSection("EmailSettings:DisplayName").Value, configuration.GetSection("EmailSettings:Email").Value));
             email.To.Add(MailboxAddress.Parse("tomas.marro10@gmail.com"));
             email.Subject = "Pedido nuevo publicado en tu zona";
-            email.Body = new TextPart(TextFormat.Html) { Text = $"Nuevo pedido con Fecha de retiro:{pedido.FechaRetiro}, fecha de entrega: {pedido.FechaEntrega} en el domicilio: Buenos Aires 450," +
-                $" Córdoba, Córdoba, Argentina, para entregar en la direccion: {pedido.DomicilioEntrega.Calle}{pedido.DomicilioEntrega.Numero}, el tipo de carga es: {pedido.TipoCarga.Nombre}" };
+            email.Body = new TextPart(TextFormat.Html)
+            {
+                            Text = $@"
+                                <h1>pedido</h1>
+                    <h2>Usuario: Tomas Marro</h2>
+                    <h3>Datos de Envío:</h3>
+                    <table border=""1"">
+                      <tr>
+                        <th>Fecha de retiro</th>
+                        <th>Dirección de retiro</th>
+                        <th>Fecha de entrega</th>
+                        <th>Dirección de entrega</th>
+                        <th>Tipo de carga</th>
+                        <th>Observaciones</th>
+                      </tr>
+                      <tr>
+                        <td>{pedido.FechaRetiro}</td>
+                        <td>{pedido.DomicilioRetiro.Calle} {pedido.DomicilioRetiro.Numero}, {pedido.DomicilioRetiro.Localidad.Nombre}, {provinciaRetiro.Nombre}, {paisRetiro.Nombre}</td>
+                        <td>{pedido.FechaEntrega}</td>
+                        <td>{pedido.DomicilioEntrega.Calle}{pedido.DomicilioEntrega.Numero},{provinciaEntrega.Nombre},{paisEntrega.Nombre}</td>
+                        <td>{pedido.TipoCarga.Nombre}</td>
+                        <td>{pedido.Observaciones}</td>
+                      </tr>
+                    </table>
+                "
+            };
 
-            
 
             using (SmtpClient smtp = new SmtpClient())
             {
@@ -113,6 +143,8 @@ namespace TP6_ICS_G10_2024.Controllers
                 await smtp.SendAsync(email);
                 await smtp.DisconnectAsync(true);
             }
+
+            //Vuelve al inicio
             return RedirectToAction("Index", "Home");
         }
     }

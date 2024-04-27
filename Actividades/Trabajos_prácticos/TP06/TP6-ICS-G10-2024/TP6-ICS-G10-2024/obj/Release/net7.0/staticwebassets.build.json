@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tWoUfQYEKaJF+KqLMWCgronq8G+cHNnD3Re8vYMdcJI=",
+  "Hash": "a7VYdXeU/ChApyTecu/TfMMIZ+MTMFa43GDGn5FRLao=",
   "Source": "TP6-ICS-G10-2024",
   "BasePath": "_content/TP6-ICS-G10-2024",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\tomas\\Downloads\\ICS\\TPGIT\\2024_ICS_4K4_G\\Actividades\\Trabajos_prácticos\\TP06\\TP6-ICS-G10-2024\\TP6-ICS-G10-2024\\wwwroot\\Imagenes\\nofoto.png",
+      "SourceId": "TP6-ICS-G10-2024",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\tomas\\Downloads\\ICS\\TPGIT\\2024_ICS_4K4_G\\Actividades\\Trabajos_prácticos\\TP06\\TP6-ICS-G10-2024\\TP6-ICS-G10-2024\\wwwroot\\",
+      "BasePath": "_content/TP6-ICS-G10-2024",
+      "RelativePath": "Imagenes/nofoto.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagenes\\nofoto.png"
     },
     {
       "Identity": "C:\\Users\\tomas\\Downloads\\ICS\\TPGIT\\2024_ICS_4K4_G\\Actividades\\Trabajos_prácticos\\TP06\\TP6-ICS-G10-2024\\TP6-ICS-G10-2024\\wwwroot\\js\\site.js",

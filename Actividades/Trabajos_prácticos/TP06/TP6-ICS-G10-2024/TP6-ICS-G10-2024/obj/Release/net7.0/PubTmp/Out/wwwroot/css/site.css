@@ -1,24 +1,37 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: Montserrat;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: Montserrat;
+}
+
+// CAMBIE
+.custom-navbar {
+    background-color: #cdcdcd;
+}
+
+#encabezado {
+    background-color: #2D9E5C;
+    color: white;
+    font-weight: bold;
 }
 
 
@@ -45,7 +58,7 @@ body {
     width: 110px;
     cursor: pointer;
     padding: 10px;
-    border: 2px dashed #cacaca;
+    border: 2px dashed white;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 50%;
     box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
@@ -72,35 +85,43 @@ body {
     }
 
 
-
-table {
-    background-color: #240046;
-}
-
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid white;
     padding: 8px;
     text-align: center;
-    color: white;
+    /*color: white;*/
+    font-family: Montserrat;
 }
 
 .table thead th {
-    background-color: #e0eafc; /* Color de fondo azulcito */
-    border-color: black;
-    color: black;
+    background-color: #35724F; /* Color de fondo  */
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
     text-align: center;
     align-items: center;
 }
 
-table tr:hover {
-    background-color: #d4e3fc; /* Color de fondo al pasar el ratón */
+table tr {
+    background-color: #E7E7E7; /* Color de fondo azulcito */
+    border: 5px solid #cdcdcd;
+    color: black;
+    text-align: center;
+    vertical-align: central;
 }
 
-    table tr:hover td {
-        font-weight: bold; /* Añade negrita al texto dentro de las celdas al pasar el ratón */
+    table tr:hover {
+        background-color: #DFF8EB; /* Color de fondo al pasar el ratón */
+        border: 5px solid white;
         color: black;
-        border-color: black;
+        font-weight: bold;
     }
+
+        table tr:hover td {
+            font-weight: bold; /* Añade negrita al texto dentro de las celdas al pasar el ratón */
+            /*color: white;*/
+        }
+
 
 
 img {
@@ -197,4 +218,16 @@ img {
     100% {
         fill: white;
     }
+}
+
+.subtitulo {
+    background-color: #364156;
+    color: white;
+    font-weight: bold;
+}
+
+#containerPrinc {
+    background-color: #cdcdcd;
+    color: white;
+    font-weight: bold;
 }

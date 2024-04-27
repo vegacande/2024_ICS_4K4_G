@@ -39,13 +39,46 @@
                         <h3> Datos del domicilio de retiro</h3>
                     </td>
                 </tr>
-                    @*Datos del domicilio de retiro - AGREGAR*@
+                <tr class="bg-light">
+                    <td>
+                        <label asp-for="DomicilioRetiro.Numero" class="control-label"></label>
+                        <input type="number" name="DomicilioRetiro.Numero" value="" asp-for="DomicilioRetiro.Numero" />
+                    </td>
+                    <td>
+
+                        <label asp-for="DomicilioRetiro.Calle" class="control-label"></label>
+                        <input type="text" asp-for="DomicilioRetiro.Calle" placeholder="Calle" />
+                    </td>
+                    <td>
+                        <label asp-for="Paises" class="control-label"></label>
+                        <select name="PaisRetiroId" id="selectPais2">
+                            <option value="0"><-----Seleccione Pais -----></option>
+                                @foreach (var item in Model.Paises)
+                                {
+                                <option value="@item.Id">@item.Nombre</option>
+                                }
+                        </select>
+                    </td>
+                    <td>
+                        <label asp-for="Provincias" class="control-label"></label>
+                        <select name="ProvinciaRetiroId" id="selectProvincia2">
+                            <!-- Opciones de provincia se llenarán dinámicamente mediante JavaScript -->
+                            <option value="0"><-----Seleccione Provincia -----></option>
+                        </select>
+                    </td>
+                    <td>
+                        <label asp-for="Localidades" class="control-label"></label>
+                        <select name="LocalidadRetiroId" id="selectLocalidad2">
+                            <!-- Opciones de localidad se llenarán dinámicamente mediante JavaScript -->
+                            <option value="0"><-----Seleccione Localidad -----></option>
+                        </select>
+                    </td>
+                </tr>
                 <tr class="subtitulo">
                     <td colspan="5">
                         <h3> Datos del domicilio de entrega</h3>
                     </td>
                 </tr>
-
                 <tr class="bg-light">
                     <td>
                         <label asp-for="DomicilioEntrega.Numero" class="control-label"></label>
@@ -129,6 +162,13 @@
                 </tr>
                 <tr class="bg-light">
                     <td colspan="5">
+                        <label asp-for="Observaciones" class="control-label"></label>
+                       <textarea asp-for="Observaciones" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Observaciones" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr class="bg-light">
+                    <td colspan="5">
                         <button class="cta" type="submit">
                             <span class="span">Publicar pedido</span>
                             <span class="second">
@@ -156,6 +196,7 @@
 
                     </td>
                 </tr>
+               
                 </form>
             </tbody>
 
@@ -216,6 +257,59 @@
             });
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectPais = document.getElementById("selectPais2");
+        var selectProvincia = document.getElementById("selectProvincia2");
+        var selectLocalidad = document.getElementById("selectLocalidad2");
+
+        // Evento change en el select de país
+        selectPais.addEventListener("change", function () {
+            var paisId = selectPais.value;
+            console.log(paisId);
+            // Limpia las opciones actuales de provincia y localidad
+
+            // Filtra las provincias por el país seleccionado
+            var provincias = @Html.Raw(Json.Serialize(Model.Provincias));
+            console.log(provincias);
+            var provinciasFiltradas = provincias.filter(function (provincia) {
+                console.log(provincia.PaisId == paisId);
+                return provincia.paisId == paisId;
+            });
+
+            console.log(provinciasFiltradas);
+            // Agrega las opciones de provincia al select
+            provinciasFiltradas.forEach(function (provincia) {
+                var option = document.createElement("option");
+                option.value = provincia.id;
+                option.textContent = provincia.nombre;
+                console.log(option);
+                selectProvincia.appendChild(option);
+            });
+        });
+
+        // Evento change en el select de provincia
+        selectProvincia.addEventListener("change", function () {
+            var provinciaId = selectProvincia.value;
+            // Limpia las opciones actuales de localidad
+
+            // Filtra las localidades por la provincia seleccionada
+            var localidades = @Html.Raw(Json.Serialize(Model.Localidades));
+            var localidadesFiltradas = localidades.filter(function (localidad) {
+                return localidad.provinciaId == provinciaId;
+            });
+
+            // Agrega las opciones de localidad al select
+            localidadesFiltradas.forEach(function (localidad) {
+                var option = document.createElement("option");
+                option.value = localidad.id;
+                option.textContent = localidad.nombre;
+                selectLocalidad.appendChild(option);
+            });
+        });
+    });
+
+
 
     $(document).ready(function () {
         $("#file").change(function () {

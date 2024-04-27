@@ -15,11 +15,17 @@ namespace TP6_ICS_G10_2024.Models
 
         public int ProvinciaId { get; set; }
 
+        public int ProvinciaRetiroId { get; set; }
+
         public int TipoCargaId { get; set; }
 
         public int LocalidadId { get; set; }
 
+        public int LocalidadRetiroId { get; set; }
+
         public int PaisId { get; set; }
+
+        public int PaisRetiroId { get; set; }
 
     }
 }
