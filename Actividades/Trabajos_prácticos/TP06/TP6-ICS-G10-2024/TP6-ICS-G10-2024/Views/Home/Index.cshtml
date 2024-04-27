@@ -1,33 +1,28 @@
 ﻿@model IEnumerable<TP6_ICS_G10_2024.Models.PedidosVM>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bienvenidos";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+@*<div class="text-center">
+    <h1 class="display-4">Bienvenidos</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-
-
-
-
+</div>*@
 
 <div class="container">
-    <table class="table-striped">
+    <table class="table">
         <thead>
             <tr>
-                <th colspan="8"><h1>Pedidos</h1></th>
+                <th id="encabezado" colspan="8"><h1>Pedidos</h1></th>
             </tr>
             <tr>
-                <th>Numero</th>
-                <th>Fecha de Retiro</th>
-                <th>Fecha de Entrega </th>
-                <th>Direccion de Retiro</th>
-                <th>Direccion de Entrega</th>
-                <th>Tipo de carga</th>
-                <th>Imagen</th>
-                <th>Acciones</th>
+                <th class="align-content-center">Número</th>
+                <th class="align-content-center">Fecha de Retiro</th>
+                <th class="align-content-center">Fecha de Entrega </th>
+                <th class="align-content-center">Dirección de Retiro</th>
+                <th class="align-content-center">Dirección de Entrega</th>
+                <th class="align-content-center">Tipo de carga</th>
+                <th class="align-content-center">Imagen</th>
+                <th class="align-content-center">Cotización</th>
             </tr>
         </thead>
         <tbody>
@@ -36,13 +31,13 @@
                 @foreach (var Pedido in Model)
                 {
                     <tr>
-                        <td>@Pedido.Id</td>
-                        <td>@Pedido.FechaRetiro.ToShortDateString()</td>
-                        <td>@Pedido.FechaEntrega.ToShortDateString()</td>
-                        <td>Buenos Aires 450, Córdoba, Córdoba, Argentina</td>
-                        <td>@Pedido.DomicilioEntrega.Calle @Pedido.DomicilioEntrega.Numero, @Pedido.Localidad, @Pedido.Provincia.Nombre, @Pedido.Pais.Nombre</td>
-                        <td>@Pedido.TipoCarga.Nombre</td>
-                        <td>
+                        <td class="align-content-center">@Pedido.Id</td>
+                        <td class="align-content-center">@Pedido.FechaRetiro.ToShortDateString()</td>
+                        <td class="align-content-center">@Pedido.FechaEntrega.ToShortDateString()</td>
+                        <td class="align-content-center">Buenos Aires 450, Córdoba, Córdoba, Argentina</td>
+                        <td class="align-content-center">@Pedido.DomicilioEntrega.Calle @Pedido.DomicilioEntrega.Numero, @Pedido.Localidad, @Pedido.Provincia.Nombre, @Pedido.Pais.Nombre</td>
+                        <td class="align-content-center">@Pedido.TipoCarga.Nombre</td>
+                        <td class="align-content-center">
                             @if (Pedido.Imagen != null && Pedido.Imagen.Length > 0 && !Pedido.Imagen.SequenceEqual(new byte[0]))
                             {
                                 <img loading="lazy" src="data:image/jpeg;base64,@Convert.ToBase64String(Pedido.Imagen)" alt="@Pedido.Id" />
@@ -50,17 +45,18 @@
                             }
                             else
                             {
+                                <a>No se cargo una imagen del paquete</a>
                                 <img src="~/Imagenes/nofoto.png" />
 
                             }
                         </td>
-                        <td>
-                            <button>Cotizar</button>
+                        <td class="align-content-center">
+                            <button type="button" class="btn btn-rounded bg-white">Cotizar pedido</button>
                         </td>
                     </tr>
                 }
             }
-            
+
         </tbody>
     </table>
 </div>
