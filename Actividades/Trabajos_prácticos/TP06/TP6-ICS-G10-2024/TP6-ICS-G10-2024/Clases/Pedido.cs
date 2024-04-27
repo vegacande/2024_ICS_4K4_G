@@ -30,6 +30,8 @@ namespace TP6_ICS_G10_2024.Clases
 
         public byte[]? Imagen { get; set; }
 
+        public virtual bool DomiciolioDeUsuario { get; set; }
+
         public decimal MontoFinal { get; set; }
 
         public async Task ConvertirFotoAsync(IFormFile foto)

@@ -14,6 +14,7 @@ namespace TP6_ICS_G10_2024.Controllers
     {
         private readonly IRepositorioTipoCargas repositorioTipoCargas;
         private readonly IRepositorioPaises repositorioPaises;
+        private readonly IRepositorioDomicilios repositorioDomicilios;
         private readonly IRepositorioProvincias repositorioProvincias;
         private readonly IRepositorioLocalidades repositorioLocalidades;
         private readonly IRepositorioPedidos repositorioPedidos;
@@ -21,11 +22,12 @@ namespace TP6_ICS_G10_2024.Controllers
         private readonly SmtpSettings emailSettings;
 
         public PedidosController(IRepositorioTipoCargas repositorioTipoCargas,
-            IRepositorioPaises repositorioPaises,
+            IRepositorioPaises repositorioPaises, IRepositorioDomicilios repositorioDomicilios,
             IRepositorioProvincias repositorioProvincias, IRepositorioLocalidades repositorioLocalidades, IRepositorioPedidos repositorioPedidos, IConfiguration configuration, IOptions<SmtpSettings> options)
         {
             this.repositorioTipoCargas = repositorioTipoCargas;
             this.repositorioPaises = repositorioPaises;
+            this.repositorioDomicilios = repositorioDomicilios;
             this.repositorioProvincias = repositorioProvincias;
             this.repositorioLocalidades = repositorioLocalidades;
             this.repositorioPedidos = repositorioPedidos;
@@ -57,9 +59,10 @@ namespace TP6_ICS_G10_2024.Controllers
         {
 
             //Valida en el caso que no se ingrese algun dato del pedido tanto como la fechas ,direcciones, tipo de carga
-            if (pedido.LocalidadId <= 0 || pedido.PaisId <= 0 || pedido.ProvinciaId <= 0 || pedido.DomicilioEntrega.Calle == null || pedido.DomicilioEntrega.Numero <= 0)
+            if (pedido.LocalidadId <= 0 || pedido.PaisId <= 0 || pedido.ProvinciaId <= 0 || pedido.DomicilioEntrega.Calle == null || pedido.DomicilioEntrega.Numero <= 0
+                )
             {
-                TempData["error"] = "El pedido no se ha publicado con éxito, hay algunos datos de la dirección de entrega inválidos o incorrectos";
+                TempData["error"] = "El pedido no se ha publicado con éxito, hay algunos datos de la dirección de entrega y/o retiro inválidos o incorrectos";
             }
             else if (pedido.FechaRetiro < DateTime.Today || pedido.FechaRetiro == null)
             {
@@ -74,6 +77,23 @@ namespace TP6_ICS_G10_2024.Controllers
                 TempData["error"] = "El pedido no se ha publicado con éxito, el tipo de carga no se ha seleccionado";
             }
 
+            if (pedido.DomiciolioDeUsuario)
+            {
+                pedido.DomicilioRetiroId = 5;
+                pedido.DomicilioRetiro = repositorioDomicilios.ObtenerDomicilioPorId(5);
+                pedido.DomicilioRetiro.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.DomicilioRetiro.LocalidadId);
+                pedido.ProvinciaRetiroId = pedido.DomicilioRetiro.Localidad.ProvinciaId;
+                pedido.LocalidadRetiroId = pedido.DomicilioRetiro.LocalidadId;
+                pedido.PaisRetiroId = 1;
+            }
+            else
+            {
+                if (pedido.DomicilioRetiro.Calle == null || pedido.DomicilioRetiro.Numero <= 0 || pedido.ProvinciaRetiroId <= 0 || pedido.ProvinciaRetiroId <= 0)
+                {
+                    TempData["error"] = "El pedido no se ha publicado con éxito, hay algunos datos de la dirección de entrega y/o retiro inválidos o incorrectos";
+                }
+            }
+
             if (TempData["error"] != null)
             {
                 pedido.TipoCargas = await repositorioTipoCargas.ObtenerTipoCargas();
@@ -82,6 +102,7 @@ namespace TP6_ICS_G10_2024.Controllers
                 pedido.Localidades = await repositorioLocalidades.ObtenerLocalidades();
                 return View(pedido);
             }
+
 
             await pedido.ConvertirFotoAsync(pedido.ImagenFile);
             pedido.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadId);

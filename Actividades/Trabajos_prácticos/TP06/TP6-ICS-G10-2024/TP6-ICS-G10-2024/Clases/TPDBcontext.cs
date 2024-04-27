@@ -18,6 +18,12 @@ namespace TP6_ICS_G10_2024.Clases
         public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Pais> Paises { get; set; }
 
+        //caundo hago la consulta no tengas en cuenta al tributo Imagen del pedido 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Pedido>().Ignore(p => p.DomiciolioDeUsuario);
+        }
+
 
     }
 }

@@ -30,18 +30,50 @@ namespace TP6_ICS_G10_2024.Controllers
         {
             IEnumerable<PedidosVM> pedidos = await repositorioPedidos.ObtenerTodos();
 
+            // Obtener todas las provincias, localidades y domicilios
+            var provincias = await repositorioProvincias.ObtenerProvincias();
+            var localidades = await repositorioLocalidades.ObtenerLocalidades();
+            IEnumerable<Domicilio> domicilios = await repositorioDomicilios.ObtenerDomicilios();
+            var paises = await repositorioPaises.ObtenerPaises();
+
+            // Mapear los datos de los pedidos
             foreach (var item in pedidos)
             {
-                item.LocalidadRetiro = repositorioLocalidades.ObtenerLocalidadPorId(item.DomicilioRetiro.LocalidadId);
-                item.ProvinciaRetiro = repositorioProvincias.ObtenerProvinciaPorId(item.LocalidadRetiro.ProvinciaId);
-                item.PaisRetiro = repositorioPaises.ObtenerPaisPorId(item.ProvinciaRetiro.PaisId);
-                item.DomicilioEntrega = repositorioDomicilios.ObtenerDomicilioPorId(item.DomicilioEntregaId);
-                item.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(item.DomicilioEntrega.LocalidadId);
-                item.Provincia = repositorioProvincias.ObtenerProvinciaPorId(item.DomicilioEntrega.Localidad.ProvinciaId);
-                item.Pais = repositorioPaises.ObtenerPaisPorId(item.Provincia.PaisId);
+                // Obtener la localidad de retiro del pedido
+                var localidadRetiro = localidades.FirstOrDefault(l => l.Id == item.DomicilioRetiro.LocalidadId);
+                if (localidadRetiro != null)
+                {
+                    // Obtener la provincia de retiro
+                    item.LocalidadRetiro = localidadRetiro;
+                    item.ProvinciaRetiro = provincias.FirstOrDefault(p => p.Id == localidadRetiro.ProvinciaId);
+                    if (item.ProvinciaRetiro != null)
+                    {
+                        // Obtener el país de retiro
+                        item.PaisRetiro = paises.FirstOrDefault(pa => pa.Id == item.ProvinciaRetiro.PaisId);
+                    }
+                }
+
+                // Obtener el domicilio de entrega
+                item.DomicilioEntrega = domicilios.FirstOrDefault(d => d.Id == item.DomicilioEntregaId);
+                if (item.DomicilioEntrega != null)
+                {
+                    // Obtener la localidad de entrega
+                    item.DomicilioEntrega.Localidad = localidades.FirstOrDefault(l => l.Id == item.DomicilioEntrega.LocalidadId);
+                    if (item.DomicilioEntrega.Localidad != null)
+                    {
+                        // Obtener la provincia de entrega
+                        item.Provincia = provincias.FirstOrDefault(p => p.Id == item.DomicilioEntrega.Localidad.ProvinciaId);
+                        if (item.Provincia != null)
+                        {
+                            // Obtener el país de entrega
+                            item.Pais = paises.FirstOrDefault(pa => pa.Id == item.Provincia.PaisId);
+                        }
+                    }
+                }
             }
-            
+
             return View(pedidos);
+
         }
 
         public IActionResult Privacy()
