@@ -141,6 +141,7 @@ namespace TP6_ICS_G10_2024.Controllers
                         <th>Dirección de entrega</th>
                         <th>Tipo de carga</th>
                         <th>Observaciones</th>
+                        <th>Forma de pago preferida</th>
                       </tr>
                       <tr>
                         <td>{pedido.FechaRetiro}</td>
@@ -149,6 +150,7 @@ namespace TP6_ICS_G10_2024.Controllers
                         <td>{pedido.DomicilioEntrega.Calle}{pedido.DomicilioEntrega.Numero},{provinciaEntrega.Nombre},{paisEntrega.Nombre}</td>
                         <td>{pedido.TipoCarga.Nombre}</td>
                         <td>{pedido.Observaciones}</td>
+                        <td>{pedido.FormaDePago.Nombre}</td>
                       </tr>
                     </table>
                 "
