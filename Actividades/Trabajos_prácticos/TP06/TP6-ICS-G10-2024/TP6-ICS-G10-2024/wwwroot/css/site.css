@@ -18,21 +18,8 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-    font-family: Montserrat;
-}
 
-// CAMBIE
-.custom-navbar {
-    background-color: #cdcdcd;
-}
 
-#encabezado {
-    background-color: #2D9E5C;
-    color: white;
-    font-weight: bold;
-}
 
 
 
@@ -94,7 +81,7 @@ th, td {
 }
 
 .table thead th {
-    background-color: #35724F; /* Color de fondo  */
+    background-color: #364156; /* Color de fondo  */
     border: 1px solid white;
     color: white;
     font-weight: bold;
@@ -221,13 +208,28 @@ img {
 }
 
 .subtitulo {
-    background-color: #364156;
+    background-color: #35724F;
     color: white;
     font-weight: bold;
 }
 
-#containerPrinc {
+
+body {
+    margin-bottom: 60px;
+    font-family: Montserrat;
+    background-image: url(../Imagenes/fotoFondo.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#container-principal {
     background-color: #cdcdcd;
+    color: white;
+    font-weight: bold;
+}
+
+#encabezado {
+    background-color: #2D9E5C;
     color: white;
     font-weight: bold;
 }
