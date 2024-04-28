@@ -18,6 +18,7 @@
                 <th class="align-content-center">Tipo de carga</th>
                 <th class="align-content-center">Imagen</th>
                 <th class="align-content-center">Observaciones</th>
+                <th class="align-content-center">Forma de pago preferida</th>
                 <th class="align-content-center">Cotización</th>
             </tr>
         </thead>
@@ -47,6 +48,9 @@
                         </td>
                         <td class="align-content-center">
                             @Pedido.Observaciones
+                        </td> 
+                        <td class="align-content-center">
+                            @Pedido.FormaDePago.Nombre
                         </td>
                         <td class="align-content-center">
                             <button type="button" class="btn btn-rounded bg-white">Cotizar pedido</button>

@@ -17,19 +17,22 @@ namespace TP6_ICS_G10_2024.Controllers
         private readonly IRepositorioDomicilios repositorioDomicilios;
         private readonly IRepositorioProvincias repositorioProvincias;
         private readonly IRepositorioLocalidades repositorioLocalidades;
+        private readonly IRepositorioFormaDePago repositorioFormaDePago;
         private readonly IRepositorioPedidos repositorioPedidos;
         private readonly IConfiguration configuration;
         private readonly SmtpSettings emailSettings;
 
         public PedidosController(IRepositorioTipoCargas repositorioTipoCargas,
             IRepositorioPaises repositorioPaises, IRepositorioDomicilios repositorioDomicilios,
-            IRepositorioProvincias repositorioProvincias, IRepositorioLocalidades repositorioLocalidades, IRepositorioPedidos repositorioPedidos, IConfiguration configuration, IOptions<SmtpSettings> options)
+            IRepositorioProvincias repositorioProvincias, IRepositorioLocalidades repositorioLocalidades, IRepositorioFormaDePago repositorioFormaDePago, 
+            IRepositorioPedidos repositorioPedidos, IConfiguration configuration, IOptions<SmtpSettings> options)
         {
             this.repositorioTipoCargas = repositorioTipoCargas;
             this.repositorioPaises = repositorioPaises;
             this.repositorioDomicilios = repositorioDomicilios;
             this.repositorioProvincias = repositorioProvincias;
             this.repositorioLocalidades = repositorioLocalidades;
+            this.repositorioFormaDePago = repositorioFormaDePago;
             this.repositorioPedidos = repositorioPedidos;
             this.configuration = configuration;
             this.emailSettings = options.Value;
@@ -49,6 +52,7 @@ namespace TP6_ICS_G10_2024.Controllers
             modelo.Paises = await repositorioPaises.ObtenerPaises();
             modelo.Provincias = await repositorioProvincias.ObtenerProvincias();
             modelo.Localidades = await repositorioLocalidades.ObtenerLocalidades();
+            modelo.FormasDePago = await repositorioFormaDePago.ObtenerFormasDepago();
 
             return View(modelo);
 
@@ -107,6 +111,7 @@ namespace TP6_ICS_G10_2024.Controllers
             await pedido.ConvertirFotoAsync(pedido.ImagenFile);
             pedido.DomicilioEntrega.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadId);
             pedido.DomicilioRetiro.Localidad = repositorioLocalidades.ObtenerLocalidadPorId(pedido.LocalidadRetiroId);
+            pedido.FormaDePago = repositorioFormaDePago.ObtenerFormaDepagoPorId(pedido.FormaDePagoId);
             pedido.TipoCarga = await repositorioTipoCargas.ObtenerCargaPorId(pedido.TipoCargaId);
             await repositorioPedidos.Crear(pedido);
 

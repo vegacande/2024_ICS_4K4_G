@@ -34,7 +34,18 @@
                         </select>
                     </td>
                 </tr>
-
+                    <tr class="bg-light">
+                        <td colspan="5">
+                            <label asp-for="FormaDePago" class="control-label"></label>:
+                            <select name="FormaDePagoId">
+                                <option value="0"><-----Seleccione Forma de pago preferida---></option>
+                                    @foreach (var item in Model.FormasDePago)
+                                    {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                    }
+                            </select>
+                        </td>
+                    </tr>
                 <tr class="subtitulo">
                     <td colspan="5">
                         <h3> Datos del domicilio de retiro</h3>

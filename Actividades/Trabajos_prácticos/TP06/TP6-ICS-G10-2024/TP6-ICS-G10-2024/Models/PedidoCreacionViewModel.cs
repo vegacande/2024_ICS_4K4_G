@@ -11,6 +11,8 @@ namespace TP6_ICS_G10_2024.Models
         public IEnumerable<Pais> Paises { get; set; }
         public IEnumerable<TipoCarga> TipoCargas { get; set; }
 
+        public IEnumerable<FormaDePago> FormasDePago { get; set; }
+
         public IFormFile? ImagenFile { get; set; }
 
         public int ProvinciaId { get; set; }

@@ -20,6 +20,7 @@ builder.Services.AddScoped<IRepositorioProvincias, ProvinciasRepositorio>();
 builder.Services.AddScoped<IRepositorioTipoCargas, TipoCargasRepositorio>();
 builder.Services.AddScoped<IRepositorioPedidos, PedidosRepositorio>();
 builder.Services.AddScoped<IRepositorioDomicilios, DomiciliosRepositorio>();
+builder.Services.AddScoped<IRepositorioFormaDePago, FormaDePagosRepositorio>();
 
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("EmailSettings"));
 

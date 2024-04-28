@@ -14,6 +14,7 @@ namespace TP6_ICS_G10_2024.Clases
         public virtual DbSet<Provincia> Provincias { get; set; }
 
         public virtual DbSet<TipoCarga> TipoCargas { get; set; }
+        public virtual DbSet<FormaDePago> FormaDePagos { get; set; }
 
         public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Pais> Paises { get; set; }

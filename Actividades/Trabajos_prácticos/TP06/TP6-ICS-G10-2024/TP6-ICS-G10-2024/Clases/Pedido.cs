@@ -11,8 +11,10 @@ namespace TP6_ICS_G10_2024.Clases
     {
         public int Id { get; set; }
 
+        [Display(Name = "Fecha de retiro")]
         public DateTime FechaRetiro { get; set; }
 
+        [Display(Name = "Fecha de entrega")]
         public DateTime FechaEntrega { get; set; }
 
         public Domicilio DomicilioEntrega { get; set; }
@@ -26,9 +28,16 @@ namespace TP6_ICS_G10_2024.Clases
         [MaxLength(200)]
         public string Observaciones { get; set; }
 
+
+        [Display(Name = "Tipo de carga")]
         public TipoCarga TipoCarga { get; set; }
 
         public byte[]? Imagen { get; set; }
+
+        [Display(Name = "Forma de pago")]
+        public FormaDePago FormaDePago { get; set; }
+
+        public int FormaDePagoId { get; set; }
 
         public virtual bool DomiciolioDeUsuario { get; set; }
 
