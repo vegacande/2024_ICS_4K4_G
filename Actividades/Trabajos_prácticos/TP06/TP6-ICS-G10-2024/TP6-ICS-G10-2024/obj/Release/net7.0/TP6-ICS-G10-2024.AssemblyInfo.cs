@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TP6-ICS-G10-2024")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bbc2b00cabd242ca5662b7a191e97bc6d8ba49b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+06e54135dd96e8f63dd485674f4a4760128f9dc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("TP6-ICS-G10-2024")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TP6-ICS-G10-2024")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
