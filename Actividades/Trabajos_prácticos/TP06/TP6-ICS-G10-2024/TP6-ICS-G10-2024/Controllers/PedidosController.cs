@@ -180,7 +180,7 @@ namespace TP6_ICS_G10_2024.Controllers
                 await smtp.SendAsync(email);
                 await smtp.DisconnectAsync(true);
             }
-
+            TempData["exito"] = "El pedido se publico conn exito";
             //Vuelve al inicio
             return RedirectToAction("Index", "Home");
         }
